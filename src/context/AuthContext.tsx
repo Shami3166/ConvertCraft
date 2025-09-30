@@ -98,24 +98,37 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const res = await loginUser(email, password);
       console.log("✅ Login response:", res);
 
-      // ✅ TEST: Immediately fetch user info after login
-      console.log("🔄 Testing cookie/auth...");
-      const userInfo = await getUserInfo();
-      console.log("✅ User info after login:", userInfo);
+      if (res.user) {
+        // ✅ IMPORTANT: Wait for cookie to be set and processed
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      if (userInfo.role !== "guest") {
-        setUser(res.user);
-        setIsAuthenticated(true);
-        await fetchUserInfo();
+        console.log("🔄 Fetching user info after login...");
+        const userInfo = await getUserInfo();
+        console.log("✅ User info after login:", userInfo);
+
+        if (userInfo && userInfo.user && userInfo.user.id) {
+          setUser(res.user);
+          setIsAuthenticated(true);
+          await fetchUserInfo(); // Refresh all user data
+          console.log("✅ Login successful, user authenticated");
+        } else {
+          console.error("❌ Login succeeded but user info fetch failed!");
+          console.log("User info response:", userInfo);
+          throw new Error(
+            "Authentication failed after login - cookies not working"
+          );
+        }
       } else {
-        console.error("❌ Login succeeded but auth failed!");
+        throw new Error("No user data in login response");
       }
     } catch (error) {
       console.error("❌ Login failed:", error);
+      // Clear any partial state on login failure
+      setUser(null);
+      setIsAuthenticated(false);
       throw error;
     }
   };
-
   const register = async (name: string, email: string, password: string) => {
     try {
       const res = await registerUser(name, email, password);
