@@ -13,6 +13,12 @@ import { useAuth } from "@/context/AuthContext";
 import { History, Sparkles, ArrowRight, Clock } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
+// ✅ FIXED: Import images directly
+import mediaImage from "@/assets/images/media.webp";
+import media2Image from "@/assets/images/media2.webp";
+import media3Image from "@/assets/images/media3.webp";
+import media4Image from "@/assets/images/media4.jpg";
+
 // ✅ ADD THIS FUNCTION RIGHT ABOVE YOUR Converter COMPONENT
 const getConverterSpecificKeywords = (converter: Converter): string => {
   const keywords: { [key: string]: string } = {
@@ -835,7 +841,7 @@ const Converter: React.FC = () => {
           <FeatureSection
             title="Fast and Reliable Conversion"
             description="Our advanced conversion technology ensures your files are converted quickly without compromising quality."
-            imageUrl="/src/assets/images/media.webp"
+            imageUrl={mediaImage}
             features={[
               "Lightning-fast conversion process",
               "Maintains original quality",
@@ -848,7 +854,7 @@ const Converter: React.FC = () => {
             reverse
             title="Professional Quality Results"
             description="Get professional-grade converted files suitable for any project or platform."
-            imageUrl="/src/assets/images/media2.webp"
+            imageUrl={media2Image}
             features={[
               "High-quality output",
               "Multiple format support",
@@ -860,7 +866,7 @@ const Converter: React.FC = () => {
           <FeatureSection
             title="Easy to Use Interface"
             description="Simple drag-and-drop interface makes converting files effortless for everyone."
-            imageUrl="/src/assets/images/media3.webp"
+            imageUrl={media3Image}
             features={[
               "Intuitive drag-and-drop",
               "Real-time preview",
@@ -873,7 +879,7 @@ const Converter: React.FC = () => {
             reverse
             title="Secure and Private"
             description="Your files are safe with us. We automatically delete converted files after download."
-            imageUrl="/src/assets/images/media4.jpg"
+            imageUrl={media4Image}
             features={[
               "End-to-end encryption",
               "Automatic file deletion",
