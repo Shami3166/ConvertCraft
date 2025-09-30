@@ -320,6 +320,42 @@ const Converter: React.FC = () => {
   const converter =
     allConverters.find((conv) => conv.url === id) || allConverters[0];
 
+  // ✅ NEW: Client-side file validation function
+  const validateFileBeforeUpload = (selectedFile: File): string | null => {
+    // Check file size (800MB max)
+    const maxSize = 800 * 1024 * 1024;
+    if (selectedFile.size > maxSize) {
+      return `File too large. Maximum size is 800MB. Your file: ${(
+        selectedFile.size /
+        (1024 * 1024)
+      ).toFixed(2)}MB`;
+    }
+
+    // Check if file is empty
+    if (selectedFile.size === 0) {
+      return "File is empty. Please select a valid file.";
+    }
+
+    // Check file type matches converter
+    const allowedTypes = [
+      converter.sourceMimeType,
+      `image/${converter.sourceFormat}`,
+      `application/${converter.sourceFormat}`,
+    ];
+
+    const fileExtension = selectedFile.name.toLowerCase().split(".").pop();
+    if (
+      !allowedTypes.includes(selectedFile.type) &&
+      fileExtension !== converter.sourceFormat
+    ) {
+      return `Please upload a ${converter.sourceFormat.toUpperCase()} file. Selected: ${
+        selectedFile.type || fileExtension
+      }`;
+    }
+
+    return null; // No errors
+  };
+
   const handleBack = () => {
     navigate("/tools");
   };
@@ -356,6 +392,16 @@ const Converter: React.FC = () => {
   };
 
   const processFile = (selectedFile: File) => {
+    // ✅ NEW: Validate file before processing
+    const validationError = validateFileBeforeUpload(selectedFile);
+    if (validationError) {
+      setError(validationError);
+      setFile(null);
+      setSourceFilePreviewUrl(null);
+      setConvertedFileUrl(null);
+      return;
+    }
+
     if (
       selectedFile.type === converter.sourceMimeType ||
       selectedFile.name.toLowerCase().endsWith(`.${converter.sourceFormat}`)
