@@ -64,43 +64,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const userInfo = await getUserInfo();
       console.log("👤 User info from backend:", userInfo);
 
-      // ✅ Check if user is authenticated by role
-      const authenticated = userInfo.role !== "guest";
+      // ✅ Get authentication status from backend response
+      const authenticated = userInfo.role && userInfo.role !== "guest";
       setIsAuthenticated(authenticated);
 
-      if (authenticated) {
-        // ✅ Set user data from backend response
-        if (userInfo.user) {
-          setUser(userInfo.user);
-        } else {
-          // Fallback: if backend doesn't provide user object
-          setUser(null);
-        }
+      if (authenticated && userInfo.user) {
+        setUser(userInfo.user);
+        setUserRole(userInfo.role);
+        setConversionsUsed(userInfo.conversionsUsed || 0);
+
+        // ✅ Use planLimit from backend if provided, otherwise use default
+        setPlanLimit(userInfo.planLimit || "Unlimited");
       } else {
         setUser(null);
+        setUserRole("guest");
+        setConversionsUsed(0);
+        setPlanLimit(50); // Default guest limit from your backend
       }
-
-      // Update role and conversion count
-      setUserRole(
-        userInfo.role === "admin"
-          ? "admin"
-          : (userInfo.role as "user" | "guest")
-      );
-      setConversionsUsed(userInfo.conversionsUsed || 0);
-
-      // ✅ UPDATED: New limits - Guest: 50MB, User: 500MB, Admin: Unlimited
-      const limits: Record<string, number | "Unlimited"> = {
-        guest: 50, // 50MB for guest users
-        user: 500, // 500MB for logged-in users
-        admin: "Unlimited",
-      };
-      setPlanLimit(limits[userInfo.role as keyof typeof limits] || 50);
     } catch (error) {
       console.error("❌ Failed to fetch user info:", error);
-      setUserRole("guest");
       setUser(null);
+      setUserRole("guest");
       setConversionsUsed(0);
-      setPlanLimit(50); // 50MB for guests
+      setPlanLimit(50);
       setIsAuthenticated(false);
     }
   };

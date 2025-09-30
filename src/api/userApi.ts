@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const API_URL = import.meta.env.VITE_API_URL || "https://imageconverter-acsq.onrender.com/api";
 
 // Configure axios to include credentials (cookies) in all requests
 axios.defaults.withCredentials = true;
