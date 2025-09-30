@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL || "https://imageconverter-acsq.onrender.com/api";
-
+axios.defaults.withCredentials = true;
 export async function submitContactMessage(contactData: any) {
     const token = localStorage.getItem("token");
     const headers = token ? { Authorization: `Bearer ${token}` } : {};

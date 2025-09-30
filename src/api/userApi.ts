@@ -2,10 +2,9 @@
 import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL || "https://imageconverter-acsq.onrender.com/api";
+// ✅ This should be in ALL your API files
 
-// Configure axios to include credentials (cookies) in all requests
 axios.defaults.withCredentials = true;
-
 export interface Conversion {
     id: string;
     fileName: string;

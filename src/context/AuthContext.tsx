@@ -93,28 +93,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (email: string, password: string) => {
     try {
-      console.log("🔐 AuthContext - Starting login for:", email);
+      console.log("🔐 Starting login...");
 
       const res = await loginUser(email, password);
-      console.log("✅ AuthContext - Login response received:", res);
+      console.log("✅ Login response:", res);
 
-      if (res.user) {
-        console.log("✅ AuthContext - Valid response structure");
+      // ✅ TEST: Immediately fetch user info after login
+      console.log("🔄 Testing cookie/auth...");
+      const userInfo = await getUserInfo();
+      console.log("✅ User info after login:", userInfo);
 
+      if (userInfo.role !== "guest") {
         setUser(res.user);
         setIsAuthenticated(true);
-
-        // Fetch fresh user info to get latest role and conversion count
         await fetchUserInfo();
-
-        console.log("✅ AuthContext - Login successful");
       } else {
-        console.error("❌ AuthContext - Invalid response structure:", res);
-        throw new Error("Invalid response format from server");
+        console.error("❌ Login succeeded but auth failed!");
       }
     } catch (error) {
-      console.error("❌ AuthContext - Login failed:", error);
-      setIsAuthenticated(false);
+      console.error("❌ Login failed:", error);
       throw error;
     }
   };
