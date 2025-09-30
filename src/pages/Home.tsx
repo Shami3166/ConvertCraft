@@ -22,13 +22,17 @@ import {
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
+// ✅ FIXED: Import images directly
+import faceSwapImage from "@/assets/images/face-swap.png";
+import adventureImage from "@/assets/images/adventure.jpg";
+import officeImage from "@/assets/images/office.jpg";
+
 const Home = () => {
   const [activeTab, setActiveTab] = useState("png-jpg");
-  const images = [
-    "/src/assets/images/face-swap.png",
-    "/src/assets/images/adventure.jpg",
-    "/src/assets/images/office.jpg",
-  ];
+
+  // ✅ FIXED: Use imported images
+  const images = [faceSwapImage, adventureImage, officeImage];
+
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Auto-rotate images
