@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import { uploadFile } from "@/api/conversionApi";
 import { useAuth } from "@/context/AuthContext";
 import { History, Sparkles, ArrowRight, Clock } from "lucide-react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 // ✅ ADD THIS FUNCTION RIGHT ABOVE YOUR Converter COMPONENT
 const getConverterSpecificKeywords = (converter: Converter): string => {

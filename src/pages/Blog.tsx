@@ -20,7 +20,7 @@ import imageOptimization from "../assets/images/paints.webp";
 import formatHistory from "../assets/images/open.webp";
 import commonMistakes from "../assets/images/writing.webp";
 import socialMediaFormats from "../assets/images/market.webp";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const blogPosts = [
   {

@@ -8,7 +8,7 @@ import { Search, Shield } from "lucide-react";
 import { getAllConverters } from "../api/conversionApi";
 import { useNavigate } from "react-router-dom";
 import ConverterCard from "../components/ConverterCard";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 interface Converter {
   title: string;

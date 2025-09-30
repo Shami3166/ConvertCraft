@@ -19,7 +19,7 @@ import {
 import faceSwap from "../assets/images/shami2.png";
 import office from "../assets/images/office.jpg";
 import media from "../assets/images/adventure.jpg";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 export default function AboutPage() {
   const features = [
