@@ -736,7 +736,7 @@ const Converter: React.FC = () => {
                 >
                   <img
                     src={sourceFilePreviewUrl}
-                    alt="Preview"
+                    alt="uploading image"
                     className="max-w-full max-h-64 mx-auto rounded-lg"
                   />
                   <p className="text-sm text-gray-500 mt-2">{file?.name}</p>
@@ -805,7 +805,7 @@ const Converter: React.FC = () => {
                 >
                   <img
                     src={convertedFileUrl}
-                    alt="Converted"
+                    alt="result image"
                     className="max-w-full max-h-64 rounded-lg"
                   />
                   <Button
