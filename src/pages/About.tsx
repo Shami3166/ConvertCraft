@@ -16,7 +16,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-import faceSwap from "../assets/images/shaheed1.png";
+import faceSwap from "../assets/images/shami2.png";
 import office from "../assets/images/office.jpg";
 import media from "../assets/images/adventure.jpg";
 import { Helmet } from "react-helmet-async";
@@ -123,7 +123,7 @@ export default function AboutPage() {
                 </Badge>
 
                 <h1 className="text-4xl lg:text-5xl font-bold leading-tight">
-                  Shaheedullah
+                  Transforming Files
                   <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-purple-200">
                     Empowering Creativity
                   </span>
