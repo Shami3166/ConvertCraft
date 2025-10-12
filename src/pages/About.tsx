@@ -123,7 +123,7 @@ export default function AboutPage() {
                 </Badge>
 
                 <h1 className="text-4xl lg:text-5xl font-bold leading-tight">
-                  Transforming Files
+                  Shaheedullah
                   <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-purple-200">
                     Empowering Creativity
                   </span>
