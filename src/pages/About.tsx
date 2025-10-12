@@ -16,7 +16,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-import faceSwap from "../assets/images/shami2.png";
+import faceSwap from "../assets/images/shaheed1.png";
 import office from "../assets/images/office.jpg";
 import media from "../assets/images/adventure.jpg";
 import { Helmet } from "react-helmet-async";
